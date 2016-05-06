@@ -1,0 +1,195 @@
+$ hadoop fs -cat HadoopEssentials/input/TransactionsRepeated.txt | head -5
+166363,6/17/2015,9967,39.83,mastercard,5108750000000000,14,128,868,9651,Nicholas,Snyder,7-(279)927-0280,nsnyder2@linkedin.com,282 Mifflin Plaza,Louisville,Kentucky,40215,United States,Quimba,9-(295)433-7543,nsnyder2@paginegialle.it,Labetalol hydrochloride,Labetalol hydrochloride
+103654,4/10/2015,577,29.28,laser,630401000000000000,14,673,422,522,Wanda,Owens,3-(751)915-1657,wowens4@google.de,8646 Macpherson Circle,New York City,New York,10270,United States,Yotz,1-(171)026-8116,wowens4@washingtonpost.com,Thyme,Thym
+178237,3/9/2015,3727,74.04,jcb,3576820000000000,30,66,727,5861,Scott,Howard,1-(977)869-0887,showard9@ustream.tv,1 Merry Park,Riverside,California,92513,United States,Rhyloo,5-(776)686-4535,showard9@google.nl,DG Health Acid Reducer,Ranitidine
+259610,8/10/2015,1986,96.64,jcb,3580860000000000,35,907,620,3514,Wanda,Thomas,1-(231)229-4291,wthomash@squarespace.com,78 Marquette Court,Alexandria,Virginia,22313,United States,Gabvine,8-(540)820-5252,wthomash@storify.com,Cyclobenzaprine Hydrochloride,Cyclobenzaprine Hydrochloride
+138209,10/27/2014,8611,26.05,jcb,3576430000000000,37,29,113,6385,Nicholas,James,3-(100)448-8445,njameso@technorati.com,8409 Monica Hill,Meridian,Mississippi,39305,United States,Browsebug,4-(644)559-2172,njameso@upenn.edu,Skopko Urinary Pain Relief,PHENAZOPYRIDINE HYDROCHLORIDE
+cat: Unable to write to output stream.
+$
+
+$ hadoop jar HadoopEssentials.jar com.krish.hadoop.mapcombinereduce.MapReduceDriver -D mapreduce.job.reduces=1  -D mapreduce.job.combine.class=com.krish.hadoop.mapcombinereduce.MapReduceReducer HadoopEssentials/input/TransactionsRepeated.txt HadoopEssentials/output/MCROutput "|"
+
+16/05/05 23:52:19 INFO mapreduce.Job: Running job: job_1462345706952_0059
+16/05/05 23:52:25 INFO mapreduce.Job: Job job_1462345706952_0059 running in uber mode : false
+16/05/05 23:52:25 INFO mapreduce.Job:  map 0% reduce 0%
+16/05/05 23:52:35 INFO mapreduce.Job:  map 50% reduce 0%
+16/05/05 23:52:38 INFO mapreduce.Job:  map 100% reduce 0%
+16/05/05 23:52:44 INFO mapreduce.Job:  map 100% reduce 100%
+16/05/05 23:52:44 INFO mapreduce.Job: Job job_1462345706952_0059 completed successfully
+16/05/05 23:52:44 INFO mapreduce.Job: Counters: 49
+        File System Counters
+                FILE: Number of bytes read=1181
+                FILE: Number of bytes written=357599
+                FILE: Number of read operations=0
+                FILE: Number of large read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=276086828
+                HDFS: Number of bytes written=749
+                HDFS: Number of read operations=9
+                HDFS: Number of large read operations=0
+                HDFS: Number of write operations=2
+        Job Counters
+                Launched map tasks=2
+                Launched reduce tasks=1
+                Data-local map tasks=2
+                Total time spent by all maps in occupied slots (ms)=17621
+                Total time spent by all reduces in occupied slots (ms)=3093
+                Total time spent by all map tasks (ms)=17621
+                Total time spent by all reduce tasks (ms)=3093
+                Total vcore-seconds taken by all map tasks=17621
+                Total vcore-seconds taken by all reduce tasks=3093
+                Total megabyte-seconds taken by all map tasks=18043904
+                Total megabyte-seconds taken by all reduce tasks=3167232
+        Map-Reduce Framework
+                Map input records=1000000
+                Map output records=1000000
+                Map output bytes=29343000
+                Map output materialized bytes=1471
+                Input split bytes=292
+                Combine input records=1000000
+                Combine output records=32
+                Reduce input groups=16
+                Reduce shuffle bytes=1471
+                Reduce input records=32
+                Reduce output records=16
+                Spilled Records=64
+                Shuffled Maps =2
+                Failed Shuffles=0
+                Merged Map outputs=2
+                GC time elapsed (ms)=368
+                CPU time spent (ms)=19970
+                Physical memory (bytes) snapshot=1623322624
+                Virtual memory (bytes) snapshot=8407900160
+                Total committed heap usage (bytes)=1907884032
+        Shuffle Errors
+                BAD_ID=0
+                CONNECTION=0
+                IO_ERROR=0
+                WRONG_LENGTH=0
+                WRONG_MAP=0
+                WRONG_REDUCE=0
+        File Input Format Counters
+                Bytes Read=276086536
+        File Output Format Counters
+                Bytes Written=749
+$
+$
+$ hadoop fs -ls HadoopEssentials/output/MCROutput
+Found 2 items
+-rw-r--r--   3 kdeenath staff          0 2016-05-05 23:52 HadoopEssentials/output/MCROutput/_SUCCESS
+-rw-r--r--   3 kdeenath staff        749 2016-05-05 23:52 HadoopEssentials/output/MCROutput/part-r-00000
+$
+$
+$ hadoop fs -cat HadoopEssentials/output/MCROutput/part-r-00000
+americanexpress 46000|6.226004999999945E7|96.4|2
+bankcard        32000|3.813586999999927E7|96.07|4
+china-unionpay  41000|5.315058999999853E7|98.84|3
+diners-club-carte-blanche       39000|6.104692000000021E7|99.9|1
+diners-club-enroute     40000|6.533791999999194E7|98.53|3
+diners-club-international       11000|1.6445129999999784E7|98.34|12
+diners-club-us-ca       14000|1.883347999999971E7|99.66|5
+instapayment    21000|2.096918999999851E7|99.03|2
+jcb     449000|6.268453299999712E8|99.82|1
+laser   32000|4.132297000000131E7|91.01|1
+maestro 64000|8.40457999999991E7|99.43|1
+mastercard      93000|1.447763300000102E8|99.67|1
+solo    14000|1.506788999999949E7|97.28|5
+switch  46000|6.628507999999677E7|99.56|2
+visa    18000|2.0375969999999873E7|99.14|2
+visa-electron   40000|6.5977459999999404E7|99.95|1
+$
+
+***********************************************************************************************
+WITHOUT COMBINER
+***********************************************************************************************
+
+$ hadoop jar HadoopEssentials.jar com.krish.hadoop.mapcombinereduce.MapReduceDriver -D mapreduce.job.reduces=1 HadoopEssentials/input/TransactionsRepeated.txt HadoopEssentials/output/MROutput "~"
+
+16/05/05 23:55:44 INFO mapreduce.Job: Running job: job_1462345706952_0060
+16/05/05 23:55:50 INFO mapreduce.Job: Job job_1462345706952_0060 running in uber mode : false
+16/05/05 23:55:50 INFO mapreduce.Job:  map 0% reduce 0%
+16/05/05 23:55:59 INFO mapreduce.Job:  map 50% reduce 0%
+16/05/05 23:56:01 INFO mapreduce.Job:  map 100% reduce 0%
+16/05/05 23:56:09 INFO mapreduce.Job:  map 100% reduce 100%
+16/05/05 23:56:09 INFO mapreduce.Job: Job job_1462345706952_0060 completed successfully
+16/05/05 23:56:09 INFO mapreduce.Job: Counters: 49
+        File System Counters
+                FILE: Number of bytes read=6236915
+                FILE: Number of bytes written=12839122
+                FILE: Number of read operations=0
+                FILE: Number of large read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=276086828
+                HDFS: Number of bytes written=753
+                HDFS: Number of read operations=9
+                HDFS: Number of large read operations=0
+                HDFS: Number of write operations=2
+        Job Counters
+                Launched map tasks=2
+                Launched reduce tasks=1
+                Data-local map tasks=2
+                Total time spent by all maps in occupied slots (ms)=16165
+                Total time spent by all reduces in occupied slots (ms)=5304
+                Total time spent by all map tasks (ms)=16165
+                Total time spent by all reduce tasks (ms)=5304
+                Total vcore-seconds taken by all map tasks=16165
+                Total vcore-seconds taken by all reduce tasks=5304
+                Total megabyte-seconds taken by all map tasks=16552960
+                Total megabyte-seconds taken by all reduce tasks=5431296
+        Map-Reduce Framework
+                Map input records=1000000
+                Map output records=1000000
+                Map output bytes=29343000
+                Map output materialized bytes=6247830
+                Input split bytes=292
+                Combine input records=0
+                Combine output records=0
+                Reduce input groups=16
+                Reduce shuffle bytes=6247830
+                Reduce input records=1000000
+                Reduce output records=16
+                Spilled Records=2000000
+                Shuffled Maps =2
+                Failed Shuffles=0
+                Merged Map outputs=2
+                GC time elapsed (ms)=375
+                CPU time spent (ms)=19360
+                Physical memory (bytes) snapshot=1636200448
+                Virtual memory (bytes) snapshot=8402022400
+                Total committed heap usage (bytes)=1862795264
+        Shuffle Errors
+                BAD_ID=0
+                CONNECTION=0
+                IO_ERROR=0
+                WRONG_LENGTH=0
+                WRONG_MAP=0
+                WRONG_REDUCE=0
+        File Input Format Counters
+                Bytes Read=276086536
+        File Output Format Counters
+                Bytes Written=753
+$
+$
+$ hadoop fs -ls HadoopEssentials/output/MROutput
+Found 2 items
+-rw-r--r--   3 kdeenath staff          0 2016-05-05 23:56 HadoopEssentials/output/MROutput/_SUCCESS
+-rw-r--r--   3 kdeenath staff        753 2016-05-05 23:56 HadoopEssentials/output/MROutput/part-r-00000
+$
+$ hadoop fs -cat HadoopEssentials/output/MROutput/part-r-00000
+americanexpress 46000~6.226004999999156E7~96.4~2
+bankcard        32000~3.813586999999511E7~96.07~4
+china-unionpay  41000~5.3150590000005715E7~98.84~3
+diners-club-carte-blanche       39000~6.1046919999997675E7~99.9~1
+diners-club-enroute     40000~6.533792000000019E7~98.53~3
+diners-club-international       11000~1.6445130000000289E7~98.34~12
+diners-club-us-ca       14000~1.883347999999932E7~99.66~5
+instapayment    21000~2.0969189999999546E7~99.03~2
+jcb     449000~6.26845330000015E8~99.82~1
+laser   32000~4.132296999999817E7~91.01~1
+maestro 64000~8.40458000000175E7~99.43~1
+mastercard      93000~1.447763300000224E8~99.67~1
+solo    14000~1.5067889999999113E7~97.28~5
+switch  46000~6.6285079999993846E7~99.56~2
+visa    18000~2.0375970000003215E7~99.14~2
+visa-electron   40000~6.5977459999989234E7~99.95~1
+$
