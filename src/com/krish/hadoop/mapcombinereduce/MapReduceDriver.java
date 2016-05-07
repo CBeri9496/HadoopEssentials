@@ -40,15 +40,15 @@ public class MapReduceDriver extends Configured implements Tool {
 		job.setMapperClass(com.krish.hadoop.mapcombinereduce.MapReduceMapper.class);
 		job.setReducerClass(com.krish.hadoop.mapcombinereduce.MapReduceReducer.class);
 
-		// Set the job's output Key and Value types
+		// Set the job Key and Value of Mapper output
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(Text.class);
-
-		// Set input and output file as text file format
+		
+		// Set the job's output Key and Value types
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
 
-		// Set the job Key and Value of Mapper output
+		// Set input and output file as text file format
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 
