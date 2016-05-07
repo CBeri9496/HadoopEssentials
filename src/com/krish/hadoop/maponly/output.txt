@@ -57,9 +57,9 @@ $
 $
 $ hadoop fs -ls HadoopEssentials/output/MapOnlyOutput
 Found 3 items
--rw-r--r--   3 kdeenath staff          0 2016-05-05 23:43 HadoopEssentials/output/MapOnlyOutput/_SUCCESS
--rw-r--r--   3 kdeenath staff   70519530 2016-05-05 23:43 HadoopEssentials/output/MapOnlyOutput/part-m-00000
--rw-r--r--   3 kdeenath staff   66747470 2016-05-05 23:43 HadoopEssentials/output/MapOnlyOutput/part-m-00001
+-rw-r--r--   3 bigdatakrish staff          0 2016-05-05 23:43 HadoopEssentials/output/MapOnlyOutput/_SUCCESS
+-rw-r--r--   3 bigdatakrish staff   70519530 2016-05-05 23:43 HadoopEssentials/output/MapOnlyOutput/part-m-00000
+-rw-r--r--   3 bigdatakrish staff   66747470 2016-05-05 23:43 HadoopEssentials/output/MapOnlyOutput/part-m-00001
 $
 $
 $ hadoop fs -cat HadoopEssentials/output/MapOnlyOutput/part-m-00001 | head -5

@@ -65,9 +65,9 @@ $
 $
 $ hadoop fs -ls HadoopEssentials/output/DistCacheOutput
 Found 3 items
--rw-r--r--   3 kdeenath staff          0 2016-05-05 23:46 HadoopEssentials/output/DistCacheOutput/_SUCCESS
--rw-r--r--   3 kdeenath staff   86524615 2016-05-05 23:46 HadoopEssentials/output/DistCacheOutput/part-m-00000
--rw-r--r--   3 kdeenath staff   81896385 2016-05-05 23:46 HadoopEssentials/output/DistCacheOutput/part-m-00001
+-rw-r--r--   3 bigdatakrish staff          0 2016-05-05 23:46 HadoopEssentials/output/DistCacheOutput/_SUCCESS
+-rw-r--r--   3 bigdatakrish staff   86524615 2016-05-05 23:46 HadoopEssentials/output/DistCacheOutput/part-m-00000
+-rw-r--r--   3 bigdatakrish staff   81896385 2016-05-05 23:46 HadoopEssentials/output/DistCacheOutput/part-m-00001
 $
 $
 $ hadoop fs -cat HadoopEssentials/output/DistCacheOutput/part-m-00001 | head -5

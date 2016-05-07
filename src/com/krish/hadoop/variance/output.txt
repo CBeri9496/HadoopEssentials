@@ -1,0 +1,96 @@
+$ hadoop fs -cat HadoopEssentials/input/TransactionsRepeated.txt | head -5
+166363,6/17/2015,9967,39.83,mastercard,5108750000000000,14,128,868,9651,Nicholas,Snyder,7-(279)927-0280,nsnyder2@linkedin.com,282 Mifflin Plaza,Louisville,Kentucky,40215,United States,Quimba,9-(295)433-7543,nsnyder2@paginegialle.it,Labetalol hydrochloride,Labetalol hydrochloride
+103654,4/10/2015,577,29.28,laser,630401000000000000,14,673,422,522,Wanda,Owens,3-(751)915-1657,wowens4@google.de,8646 Macpherson Circle,New York City,New York,10270,United States,Yotz,1-(171)026-8116,wowens4@washingtonpost.com,Thyme,Thym
+178237,3/9/2015,3727,74.04,jcb,3576820000000000,30,66,727,5861,Scott,Howard,1-(977)869-0887,showard9@ustream.tv,1 Merry Park,Riverside,California,92513,United States,Rhyloo,5-(776)686-4535,showard9@google.nl,DG Health Acid Reducer,Ranitidine
+259610,8/10/2015,1986,96.64,jcb,3580860000000000,35,907,620,3514,Wanda,Thomas,1-(231)229-4291,wthomash@squarespace.com,78 Marquette Court,Alexandria,Virginia,22313,United States,Gabvine,8-(540)820-5252,wthomash@storify.com,Cyclobenzaprine Hydrochloride,Cyclobenzaprine Hydrochloride
+138209,10/27/2014,8611,26.05,jcb,3576430000000000,37,29,113,6385,Nicholas,James,3-(100)448-8445,njameso@technorati.com,8409 Monica Hill,Meridian,Mississippi,39305,United States,Browsebug,4-(644)559-2172,njameso@upenn.edu,Skopko Urinary Pain Relief,PHENAZOPYRIDINE HYDROCHLORIDE
+cat: Unable to write to output stream.
+$
+
+$ hadoop jar HadoopEssentials.jar com.krish.hadoop.variance.VarianceDriver -D mapreduce.job.reduces=1 HadoopEssentials/input/TransactionsRepeated.txt HadoopEssentials/output/VarianceOutput "|"
+
+16/05/06 06:30:57 INFO mapreduce.Job: Running job: job_1462345706952_0069
+16/05/06 06:31:03 INFO mapreduce.Job: Job job_1462345706952_0069 running in uber mode : false
+16/05/06 06:31:03 INFO mapreduce.Job:  map 0% reduce 0%
+16/05/06 06:31:12 INFO mapreduce.Job:  map 50% reduce 0%
+16/05/06 06:31:15 INFO mapreduce.Job:  map 100% reduce 0%
+16/05/06 06:31:23 INFO mapreduce.Job:  map 100% reduce 100%
+16/05/06 06:31:23 INFO mapreduce.Job: Job job_1462345706952_0069 completed successfully
+16/05/06 06:31:23 INFO mapreduce.Job: Counters: 49
+        File System Counters
+                FILE: Number of bytes read=3738487
+                FILE: Number of bytes written=7834976
+                FILE: Number of read operations=0
+                FILE: Number of large read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=276086828
+                HDFS: Number of bytes written=1856
+                HDFS: Number of read operations=9
+                HDFS: Number of large read operations=0
+                HDFS: Number of write operations=2
+        Job Counters
+                Launched map tasks=2
+                Launched reduce tasks=1
+                Data-local map tasks=2
+                Total time spent by all maps in occupied slots (ms)=16559
+                Total time spent by all reduces in occupied slots (ms)=5222
+                Total time spent by all map tasks (ms)=16559
+                Total time spent by all reduce tasks (ms)=5222
+                Total vcore-seconds taken by all map tasks=16559
+                Total vcore-seconds taken by all reduce tasks=5222
+                Total megabyte-seconds taken by all map tasks=16956416
+                Total megabyte-seconds taken by all reduce tasks=5347328
+        Map-Reduce Framework
+                Map input records=1000000
+                Map output records=1000000
+                Map output bytes=18707000
+                Map output materialized bytes=3742193
+                Input split bytes=292
+                Combine input records=0
+                Combine output records=0
+                Reduce input groups=16
+                Reduce shuffle bytes=3742193
+                Reduce input records=1000000
+                Reduce output records=16
+                Spilled Records=2000000
+                Shuffled Maps =2
+                Failed Shuffles=0
+                Merged Map outputs=2
+                GC time elapsed (ms)=388
+                CPU time spent (ms)=19770
+                Physical memory (bytes) snapshot=1650065408
+                Virtual memory (bytes) snapshot=8408285184
+                Total committed heap usage (bytes)=1898446848
+        Shuffle Errors
+                BAD_ID=0
+                CONNECTION=0
+                IO_ERROR=0
+                WRONG_LENGTH=0
+                WRONG_MAP=0
+                WRONG_REDUCE=0
+        File Input Format Counters
+                Bytes Read=276086536
+        File Output Format Counters
+                Bytes Written=1856
+$
+$
+$ hadoop fs -cat HadoopEssentials/output/VarianceOutput/part*
+americanexpress|46000|6.226004999999156E7|1353.4793478259035|5.512749305467525E10|1198423.7620581575|1094.7254277023794
+bankcard|32000|3.813586999999511E7|1191.7459374998473|3.173329383717137E10|991665.4324116054|995.8239967040388
+china-unionpay|41000|5.3150590000005715E7|1296.3558536586759|4.6404131337398636E10|1131808.0813999667|1063.8646913024074
+diners-club-carte-blanche|39000|6.1046919999997675E7|1565.3056410255815|6.4804035493758385E10|1661641.9357373945|1289.046909828108
+diners-club-enroute|40000|6.533792000000019E7|1633.4480000000049|4.353572126704473E10|1088393.0316761183|1043.2607687803268
+diners-club-international|11000|1.6445130000000289E7|1495.0118181818443|1.0679332134362822E10|970848.3758511656|985.3163836307431
+diners-club-us-ca|14000|1.883347999999932E7|1345.2485714285228|1.3956954783370773E10|996925.341669341|998.4614873240434
+instapayment|21000|2.0969189999999546E7|998.5328571428355|1.1951000883227987E10|569095.2801537137|754.3840402299837
+jcb|449000|6.26845330000015E8|1396.0920489978064|6.00411170578338E11|1337218.6427134478|1156.3817028617532
+laser|32000|4.132296999999817E7|1291.3428124999427|3.683727463605072E10|1151164.832376585|1072.9234979142666
+maestro|64000|8.40458000000175E7|1313.2156250002733|8.3458717755764E10|1304042.4649338126|1141.9467872601651
+mastercard|93000|1.447763300000224E8|1556.7347311830367|1.4348234623270517E11|1542820.9272333889|1242.1034285571347
+solo|14000|1.5067889999999113E7|1076.277857142794|1.15757776684355E10|826841.2620311071|909.3081227125969
+switch|46000|6.6285079999993846E7|1440.9799999998663|6.090030937180595E10|1323919.768952303|1150.6171252646568
+visa|18000|2.0375970000003215E7|1131.998333333512|2.389636697405085E10|1327575.943002825|1152.20481816508
+visa-electron|40000|6.5977459999989234E7|1649.4364999997308|6.0043590230905075E10|1501089.755772627|1225.1896815483826
+$
+
+

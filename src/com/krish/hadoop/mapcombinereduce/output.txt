@@ -76,8 +76,8 @@ $
 $
 $ hadoop fs -ls HadoopEssentials/output/MCROutput
 Found 2 items
--rw-r--r--   3 kdeenath staff          0 2016-05-05 23:52 HadoopEssentials/output/MCROutput/_SUCCESS
--rw-r--r--   3 kdeenath staff        749 2016-05-05 23:52 HadoopEssentials/output/MCROutput/part-r-00000
+-rw-r--r--   3 bigdatakrish staff          0 2016-05-05 23:52 HadoopEssentials/output/MCROutput/_SUCCESS
+-rw-r--r--   3 bigdatakrish staff        749 2016-05-05 23:52 HadoopEssentials/output/MCROutput/part-r-00000
 $
 $
 $ hadoop fs -cat HadoopEssentials/output/MCROutput/part-r-00000

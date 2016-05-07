@@ -1,0 +1,93 @@
+$ hadoop fs -cat HadoopEssentials/input/TransactionsRepeated.txt | head -5
+166363,6/17/2015,9967,39.83,mastercard,5108750000000000,14,128,868,9651,Nicholas,Snyder,7-(279)927-0280,nsnyder2@linkedin.com,282 Mifflin Plaza,Louisville,Kentucky,40215,United States,Quimba,9-(295)433-7543,nsnyder2@paginegialle.it,Labetalol hydrochloride,Labetalol hydrochloride
+103654,4/10/2015,577,29.28,laser,630401000000000000,14,673,422,522,Wanda,Owens,3-(751)915-1657,wowens4@google.de,8646 Macpherson Circle,New York City,New York,10270,United States,Yotz,1-(171)026-8116,wowens4@washingtonpost.com,Thyme,Thym
+178237,3/9/2015,3727,74.04,jcb,3576820000000000,30,66,727,5861,Scott,Howard,1-(977)869-0887,showard9@ustream.tv,1 Merry Park,Riverside,California,92513,United States,Rhyloo,5-(776)686-4535,showard9@google.nl,DG Health Acid Reducer,Ranitidine
+259610,8/10/2015,1986,96.64,jcb,3580860000000000,35,907,620,3514,Wanda,Thomas,1-(231)229-4291,wthomash@squarespace.com,78 Marquette Court,Alexandria,Virginia,22313,United States,Gabvine,8-(540)820-5252,wthomash@storify.com,Cyclobenzaprine Hydrochloride,Cyclobenzaprine Hydrochloride
+138209,10/27/2014,8611,26.05,jcb,3576430000000000,37,29,113,6385,Nicholas,James,3-(100)448-8445,njameso@technorati.com,8409 Monica Hill,Meridian,Mississippi,39305,United States,Browsebug,4-(644)559-2172,njameso@upenn.edu,Skopko Urinary Pain Relief,PHENAZOPYRIDINE HYDROCHLORIDE
+cat: Unable to write to output stream.
+$
+
+$ hadoop jar HadoopEssentials.jar com.krish.hadoop.multipleoutput.MultipleOutputDriver HadoopEssentials/input/TransactionsRepeated.txt HadoopEssentials/output/MultipleOutputDriver "|"
+
+16/05/06 23:09:15 INFO mapreduce.Job: Running job: job_1462345706952_0080
+16/05/06 23:09:21 INFO mapreduce.Job: Job job_1462345706952_0080 running in uber mode : false
+16/05/06 23:09:21 INFO mapreduce.Job:  map 0% reduce 0%
+16/05/06 23:09:30 INFO mapreduce.Job:  map 50% reduce 0%
+16/05/06 23:09:34 INFO mapreduce.Job:  map 97% reduce 0%
+16/05/06 23:09:35 INFO mapreduce.Job:  map 100% reduce 0%
+16/05/06 23:09:35 INFO mapreduce.Job: Job job_1462345706952_0080 completed successfully
+16/05/06 23:09:35 INFO mapreduce.Job: Counters: 30
+        File System Counters
+                FILE: Number of bytes read=0
+                FILE: Number of bytes written=235996
+                FILE: Number of read operations=0
+                FILE: Number of large read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=276086828
+                HDFS: Number of bytes written=128438000
+                HDFS: Number of read operations=10
+                HDFS: Number of large read operations=0
+                HDFS: Number of write operations=34
+        Job Counters
+                Launched map tasks=2
+                Data-local map tasks=2
+                Total time spent by all maps in occupied slots (ms)=18455
+                Total time spent by all reduces in occupied slots (ms)=0
+                Total time spent by all map tasks (ms)=18455
+                Total vcore-seconds taken by all map tasks=18455
+                Total megabyte-seconds taken by all map tasks=18897920
+        Map-Reduce Framework
+                Map input records=1000000
+                Map output records=0
+                Input split bytes=292
+                Spilled Records=0
+                Failed Shuffles=0
+                Merged Map outputs=0
+                GC time elapsed (ms)=260
+                CPU time spent (ms)=18830
+                Physical memory (bytes) snapshot=781430784
+                Virtual memory (bytes) snapshot=5660143616
+                Total committed heap usage (bytes)=1281359872
+        File Input Format Counters
+                Bytes Read=276086536
+        File Output Format Counters
+                Bytes Written=0
+$
+$
+$ hadoop fs -ls HadoopEssentials/output/MultipleOutputDriver
+Found 33 items
+-rw-r--r--   3 bigdatakrish staff          0 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/_SUCCESS
+-rw-r--r--   3 bigdatakrish staff    3003152 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/americanexpress-m-00000
+-rw-r--r--   3 bigdatakrish staff    2842848 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/americanexpress-m-00001
+-rw-r--r--   3 bigdatakrish staff    2112041 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/bankcard-m-00000
+-rw-r--r--   3 bigdatakrish staff    1998959 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/bankcard-m-00001
+-rw-r--r--   3 bigdatakrish staff    2697573 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/china-unionpay-m-00000
+-rw-r--r--   3 bigdatakrish staff    2552427 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/china-unionpay-m-00001
+-rw-r--r--   3 bigdatakrish staff    2520565 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/diners-club-carte-blanche-m-00000
+-rw-r--r--   3 bigdatakrish staff    2386435 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/diners-club-carte-blanche-m-00001
+-rw-r--r--   3 bigdatakrish staff    2615744 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/diners-club-enroute-m-00000
+-rw-r--r--   3 bigdatakrish staff    2476256 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/diners-club-enroute-m-00001
+-rw-r--r--   3 bigdatakrish staff     707790 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/diners-club-international-m-00000
+-rw-r--r--   3 bigdatakrish staff     670210 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/diners-club-international-m-00001
+-rw-r--r--   3 bigdatakrish staff     938548 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/diners-club-us-ca-m-00000
+-rw-r--r--   3 bigdatakrish staff     888452 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/diners-club-us-ca-m-00001
+-rw-r--r--   3 bigdatakrish staff    1381096 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/instapayment-m-00000
+-rw-r--r--   3 bigdatakrish staff    1307904 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/instapayment-m-00001
+-rw-r--r--   3 bigdatakrish staff   29650360 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/jcb-m-00000
+-rw-r--r--   3 bigdatakrish staff   28061640 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/jcb-m-00001
+-rw-r--r--   3 bigdatakrish staff    2145186 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/laser-m-00000
+-rw-r--r--   3 bigdatakrish staff    2030814 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/laser-m-00001
+-rw-r--r--   3 bigdatakrish staff    4253894 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/maestro-m-00000
+-rw-r--r--   3 bigdatakrish staff    4026106 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/maestro-m-00001
+-rw-r--r--   3 bigdatakrish staff    6108263 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/mastercard-m-00000
+-rw-r--r--   3 bigdatakrish staff    5780737 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/mastercard-m-00001
+-rw-r--r--   3 bigdatakrish staff     956247 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/solo-m-00000
+-rw-r--r--   3 bigdatakrish staff     905753 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/solo-m-00001
+-rw-r--r--   3 bigdatakrish staff    3073808 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/switch-m-00000
+-rw-r--r--   3 bigdatakrish staff    2910192 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/switch-m-00001
+-rw-r--r--   3 bigdatakrish staff    2645177 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/visa-electron-m-00000
+-rw-r--r--   3 bigdatakrish staff    2503823 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/visa-electron-m-00001
+-rw-r--r--   3 bigdatakrish staff    1174376 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/visa-m-00000
+-rw-r--r--   3 bigdatakrish staff    1111624 2016-05-06 23:09 HadoopEssentials/output/MultipleOutputDriver/visa-m-00001
+$
+
